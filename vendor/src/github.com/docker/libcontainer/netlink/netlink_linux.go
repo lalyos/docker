@@ -76,6 +76,7 @@ func newIfInfomsg(family int) *IfInfomsg {
 func newIfInfomsgChild(parent *RtAttr, family int) *IfInfomsg {
 	msg := newIfInfomsg(family)
 	parent.children = append(parent.children, msg)
+        msg.Flags = syscall.IFF_MULTICAST
 	return msg
 }
 
@@ -914,6 +915,7 @@ func NetworkCreateVethPair(name1, name2 string) error {
 	wb := newNetlinkRequest(syscall.RTM_NEWLINK, syscall.NLM_F_CREATE|syscall.NLM_F_EXCL|syscall.NLM_F_ACK)
 
 	msg := newIfInfomsg(syscall.AF_UNSPEC)
+        msg.Flags = syscall.IFF_MULTICAST
 	wb.AddData(msg)
 
 	nameData := newRtAttr(syscall.IFLA_IFNAME, zeroTerminated(name1))
