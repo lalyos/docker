@@ -23,8 +23,7 @@
 # the case. Therefore, you don't have to disable it anymore.
 #
 
-docker-version	0.6.1
-FROM	ubuntu:14.04
+FROM resin/rpi-raspbian
 MAINTAINER	Tianon Gravi <admwiggin@gmail.com> (@tianon)
 
 # Packaged dependencies
@@ -46,7 +45,6 @@ RUN	apt-get update && apt-get install -y \
 	reprepro \
 	ruby1.9.1 \
 	ruby1.9.1-dev \
-	s3cmd=1.1.0* \
 	--no-install-recommends
 
 # Get lvm2 source for compiling statically
