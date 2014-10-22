@@ -30,6 +30,7 @@ type ImagePullConfig struct {
 }
 
 func (s *TagStore) Pull(image string, tag string, imagePullConfig *ImagePullConfig) error {
+	fmt.Println("[HACK CmdPull()]")
 	var (
 		sf = streamformatter.NewStreamFormatter(imagePullConfig.Json)
 	)
@@ -58,6 +59,7 @@ func (s *TagStore) Pull(image string, tag string, imagePullConfig *ImagePullConf
 
 	logrus.Debugf("pulling image from host %q with remote name %q", repoInfo.Index.Name, repoInfo.RemoteName)
 	endpoint, err := repoInfo.GetEndpoint()
+	fmt.Println("[HACK] endpoint:", endpoint)
 	if err != nil {
 		return err
 	}
@@ -100,6 +102,7 @@ func (s *TagStore) Pull(image string, tag string, imagePullConfig *ImagePullConf
 
 func (s *TagStore) pullRepository(r *registry.Session, out io.Writer, repoInfo *registry.RepositoryInfo, askedTag string, sf *streamformatter.StreamFormatter, parallel bool) error {
 	out.Write(sf.FormatStatus("", "Pulling repository %s", repoInfo.CanonicalName))
+	fmt.Println("[HACK] pullRepository() mirrors:", mirrors)
 
 	repoData, err := r.GetRepositoryData(repoInfo.RemoteName)
 	if err != nil {

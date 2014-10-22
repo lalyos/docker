@@ -58,6 +58,7 @@ func setDefaultConfFlag(flag *string, def string) {
 }
 
 func init() {
+	fmt.Println("[HACK] flTlsVerify:", *flTlsVerify)
 	var placeholderTrustKey string
 	// TODO use flag flag.String([]string{"i", "-identity"}, "", "Path to libtrust key file")
 	flTrustKey = &placeholderTrustKey
